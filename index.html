@@ -358,15 +358,10 @@ const STEPS=[
 
   // ━━ YOU: IDENTITY ━━
   {ph:"you",b:"b-you",tag:"About You",
-    t:"Almost there \u2014 tell us about you",
-    d:"Just enough for a potential match to sense a fit.",
+    t:"Almost there",
+    d:"Completely anonymous. No personal data collected.",
     type:"form",key:"identity",
-    fields:[
-      {id:"name",l:"Name or alias",h:"How you'd like to be known",type:"text"},
-      {id:"location",l:"Where in the world?",h:"City, country, or 'nomadic'",type:"text"},
-      {id:"about",l:"What are you working on or thinking about?",h:"A sentence or two",type:"textarea"},
-    ]},
-
+    
   // ━━ YOU: SLIDER + SPLIT ━━
   {ph:"you",b:"b-you",tag:"About You",
     t:"The split \u2014 what do you bring vs. what do you need?",
@@ -479,7 +474,8 @@ function render(){
   }
 
   const isLast=step===TOTAL-1;
-  h+=`<div class="nav">${step>0?`<button class="nav-b" onclick="step--;render();window.scrollTo({top:0})">\u2190 Back</button>`:'<div></div>'}
+if(isLast)h+=`<p style="font-size:0.74rem;color:var(--ink40);margin-top:1.5rem;text-align:center;font-style:italic">Your responses are anonymous and stored only to help us understand patterns and build better tools. No personal data is collected. No data is shared with third parties.</p>`;
+h+=`<div class="nav">${step>0?`<button class="nav-b" onclick="step--;render();window.scrollTo({top:0})">\u2190 Back</button>`:'<div></div>'}
     <button class="nav-n" onclick="${isLast?'finish()':'step++;render();window.scrollTo({top:0})'}">${isLast?'See my results \u2192':'Continue \u2192'}</button></div>`;
 
   document.getElementById('body').innerHTML=h;
